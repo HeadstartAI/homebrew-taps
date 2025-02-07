@@ -13,22 +13,37 @@ class FridayAutoCoder < Formula
   depends_on "ripgrep"  # this is the package name for 'rg'
 
   def install
-    # Install the entire package into libexec
     libexec.install Dir["*"]
 
-    # Run poetry install in the libexec directory
+    # Create a symlink from .env to the user's config
     cd libexec do
       system "poetry", "install"
+      # Remove any existing .env
+      rm_f ".env"
+      # Create symlink
+      system "ln", "-sf", "$HOME/.friday_autocoder.env", ".env"
     end
 
-    # Create a wrapper script in bin that sets up the correct environment
     (bin/"friday_autocoder").write <<~EOS
       #!/bin/bash
-      cd #{libexec} && exec ./bin/run "$@"
+      if [ ! -f $HOME/.friday_autocoder.env ]; then
+        echo "No config file found at ~/.friday_autocoder.env"
+        echo "Please create one with your required environment variables"
+        exit 1
+      fi
+      exec #{libexec}/bin/run "$@"
     EOS
 
-    # Make it executable
     chmod 0755, bin/"friday_autocoder"
+  end
+
+  def post_install
+    puts "\n📝 Configuration Required:"
+    puts "Create ~/.friday_autocoder.env with your environment variables:"
+    puts "Example:"
+    puts "  OPENAI_API_KEY=your_key_here"
+    puts "  ANTHROPIC_API_KEY=your_token_here"
+    puts "\nRun 'friday_autocoder <base_path>' after setting up your config file"
   end
 
   test do
