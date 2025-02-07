@@ -20,7 +20,7 @@ class FridayAutoCoder < Formula
       system "poetry", "config", "virtualenvs.in-project", "true", "--local"
       system "poetry", "install", "--no-interaction", "--no-ansi"
       system "mkdir", "-p", "app/cli/config"
-      system "touch", "app/cli/config/.branch_config.yaml"
+      File.write("app/cli/config/.branch_config.yaml", "{}\n")
     end
 
     # Modify bin/run to use .friday_auto_coder.env
