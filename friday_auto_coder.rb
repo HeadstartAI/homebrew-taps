@@ -19,6 +19,7 @@ class FridayAutoCoder < Formula
       # Force poetry to create virtualenv in project directory
       system "poetry", "config", "virtualenvs.in-project", "true", "--local"
       system "poetry", "install", "--no-interaction", "--no-ansi"
+      system "touch", "app/cli/config/.branch_config.yaml"
     end
 
     # Modify bin/run to use .friday_auto_coder.env
