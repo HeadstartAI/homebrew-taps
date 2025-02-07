@@ -41,11 +41,13 @@ class FridayAutoCoder < Formula
 
   def post_install
     puts "\n📝 Configuration Required:"
-    puts "Create ~/.friday_auto_coder.env with your environment variables:"
+    puts "1. Create ~/.friday_auto_coder.env with your environment variables:"
     puts "Example:"
     puts "  OPENAI_API_KEY=your_key_here"
     puts "  ANTHROPIC_API_KEY=your_token_here"
-    puts "\nRun 'friday_auto_coder <base_path>' after setting up your config file"
+    puts "\n2. Login to GitHub CLI:"
+    puts "  Run 'gh auth login' and follow the prompts"
+    puts "\nRun 'friday_auto_coder <base_path>' after completing the setup"
   end
 
   test do
