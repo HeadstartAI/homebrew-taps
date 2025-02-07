@@ -15,22 +15,22 @@ class FridayAutoCoder < Formula
   def install
     libexec.install Dir["*"]
 
-    # Create a symlink from .env to the user's config
     cd libexec do
       system "poetry", "install"
-      # Create empty .env file
-      touch ".env"
-      # Create symlink
-      system "ln", "-sf", "$HOME/.friday_autocoder.env", ".env"
     end
 
+    # Modify bin/run to use .friday_autocoder.env
+    inreplace "#{libexec}/bin/run",
+      'if [ ! -f "$PROJECT_ROOT/.env" ]; then',
+      'if [ ! -f "$HOME/.friday_autocoder.env" ]; then'
+
+    inreplace "#{libexec}/bin/run",
+      'source "$PROJECT_ROOT/.env"',
+      'source "$HOME/.friday_autocoder.env"'
+
+    # Create the wrapper script
     (bin/"friday_autocoder").write <<~EOS
       #!/bin/bash
-      if [ ! -f $HOME/.friday_autocoder.env ]; then
-        echo "No config file found at ~/.friday_autocoder.env"
-        echo "Please create one with your required environment variables"
-        exit 1
-      fi
       exec #{libexec}/bin/run "$@"
     EOS
 
