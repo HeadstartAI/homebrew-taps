@@ -16,7 +16,8 @@ class FridayAutoCoder < Formula
     libexec.install Dir["*"]
 
     cd libexec do
-      # Install dependencies
+      # Force poetry to create virtualenv in project directory
+      system "poetry", "config", "virtualenvs.in-project", "true", "--local"
       system "poetry", "install", "--no-interaction", "--no-ansi"
     end
 
