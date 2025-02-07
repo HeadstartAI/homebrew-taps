@@ -4,7 +4,7 @@ class FridayAutoCoder < Formula
   url "https://api.github.com/repos/HeadstartAI/auto_coder/tarball/v1.2", using: :curl,
     headers: ["Accept: application/vnd.github.v3.raw",
              "Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
-  sha256 "96fb2fba25bc8cc7e29d4d56d485b1f5e82594aea51c122aa2d5f13b5ada9daa"
+  sha256 "7909eb4ed9cb20a15b4fd0d5f36487ca1d0fcfe9fc6c11553c304b6e449d1fa3"
 
   # Add your dependencies
   depends_on "poetry"
