@@ -19,35 +19,35 @@ class FridayAutoCoder < Formula
       system "poetry", "install"
     end
 
-    # Modify bin/run to use .friday_autocoder.env
+    # Modify bin/run to use .friday_auto_coder.env
     inreplace "#{libexec}/bin/run",
       'if [ ! -f "$PROJECT_ROOT/.env" ]; then',
-      'if [ ! -f "$HOME/.friday_autocoder.env" ]; then'
+      'if [ ! -f "$HOME/.friday_auto_coder.env" ]; then'
 
     inreplace "#{libexec}/bin/run",
       'source "$PROJECT_ROOT/.env"',
-      'source "$HOME/.friday_autocoder.env"'
+      'source "$HOME/.friday_auto_coder.env"'
 
     # Create the wrapper script
-    (bin/"friday_autocoder").write <<~EOS
+    (bin/"friday_auto_coder").write <<~EOS
       #!/bin/bash
       exec #{libexec}/bin/run "$@"
     EOS
 
-    chmod 0755, bin/"friday_autocoder"
+    chmod 0755, bin/"friday_auto_coder"
   end
 
   def post_install
     puts "\n📝 Configuration Required:"
-    puts "Create ~/.friday_autocoder.env with your environment variables:"
+    puts "Create ~/.friday_auto_coder.env with your environment variables:"
     puts "Example:"
     puts "  OPENAI_API_KEY=your_key_here"
     puts "  ANTHROPIC_API_KEY=your_token_here"
-    puts "\nRun 'friday_autocoder <base_path>' after setting up your config file"
+    puts "\nRun 'friday_auto_coder <base_path>' after setting up your config file"
   end
 
   test do
-    system "#{bin}/friday_autocoder", "--version"
+    system "#{bin}/friday_auto_coder", "--version"
   end
 end
 
