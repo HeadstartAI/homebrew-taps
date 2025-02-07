@@ -13,18 +13,26 @@ class FridayAutoCoder < Formula
   depends_on "ripgrep"  # this is the package name for 'rg'
 
   def install
-    # Run poetry install
-    system "poetry", "install"
+    # Install the entire package into libexec
+    libexec.install Dir["*"]
 
-    # Install your script
-    bin.install "bin/run" => "run"
+    # Run poetry install in the libexec directory
+    cd libexec do
+      system "poetry", "install"
+    end
 
-    # Make the script executable
-    system "chmod", "+x", "#{bin}/run"
+    # Create a wrapper script in bin that sets up the correct environment
+    (bin/"friday_autocoder").write <<~EOS
+      #!/bin/bash
+      cd #{libexec} && exec ./bin/run "$@"
+    EOS
+
+    # Make it executable
+    chmod 0755, bin/"friday_autocoder"
   end
 
   test do
-    system "#{bin}/run"
+    system "#{bin}/friday_autocoder", "--version"
   end
 end
 
