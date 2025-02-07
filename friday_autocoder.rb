@@ -1,4 +1,4 @@
-class FridayAutoCoder
+class FridayAutoCoder < Formula
   desc "Friday AutoCoder"
   homepage "https://github.com/HeadstartAI/auto_coder"
   url "https://github.com/HeadstartAI/auto_coder/archive/refs/tags/1.1.tar.gz"
