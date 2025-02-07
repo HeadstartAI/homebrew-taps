@@ -18,8 +18,8 @@ class FridayAutoCoder < Formula
     # Create a symlink from .env to the user's config
     cd libexec do
       system "poetry", "install"
-      # Remove any existing .env
-      rm_f ".env"
+      # Create empty .env file
+      touch ".env"
       # Create symlink
       system "ln", "-sf", "$HOME/.friday_autocoder.env", ".env"
     end
