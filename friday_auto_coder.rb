@@ -1,9 +1,10 @@
 class FridayAutoCoder < Formula
   desc "Friday AutoCoder"
   homepage "https://github.com/HeadstartAI/auto_coder"
-  url "https://github.com/HeadstartAI/auto_coder/archive/1.1.tar.gz", using: :curl,
-      headers: ["Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
-  # sha256 "0019dfc4b32d63c1392aa264aed2253c1e0c2fb09216f8e2cc269bbfb8bb49b5"
+  url "https://api.github.com/repos/HeadstartAI/auto_coder/tarball/1.1", using: :curl,
+    headers: ["Accept: application/vnd.github.v3.raw",
+             "Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
+  sha256 "f3450ceffb845eb13bd525dac83655bc5b50b18d5519e7c83aadf9702c947132"
 
   # Add your dependencies
   depends_on "poetry"
