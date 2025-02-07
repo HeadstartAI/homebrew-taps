@@ -16,7 +16,8 @@ class FridayAutoCoder < Formula
     libexec.install Dir["*"]
 
     cd libexec do
-      system "poetry", "install"
+      # Install dependencies
+      system "poetry", "install", "--no-interaction", "--no-ansi"
     end
 
     # Modify bin/run to use .friday_auto_coder.env
