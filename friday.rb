@@ -1,7 +1,7 @@
 class Friday < Formula
   desc "Friday"
   homepage "https://github.com/HeadstartAI/auto_coder"
-  url "https://api.github.com/repos/HeadstartAI/auto_coder/tarball/v1.2.1", using: :curl,
+  url "https://api.github.com/repos/HeadstartAI/auto_coder/tarball/v1.2.2", using: :curl,
     headers: ["Accept: application/vnd.github.v3.raw",
              "Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
   sha256 "84c4e55650c8e85ebf5347ce88e0cff490839a2c696b88d0d99558b8df73de71"
