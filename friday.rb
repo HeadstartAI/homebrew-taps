@@ -39,13 +39,12 @@ class Friday < Formula
 
   def post_install
     puts "\n📝 Configuration Required:"
-    puts "1. Create ~/.friday.env with your environment variables:"
-    puts "Example:"
-    puts "  OPENAI_API_KEY=your_key_here"
-    puts "  ANTHROPIC_API_KEY=your_token_here"
-    puts "\n2. Login to GitHub CLI:"
-    puts "  Run 'gh auth login' and follow the prompts"
-    puts "\nRun 'friday <base_path>' after completing the setup"
+    puts "Your environment file is now located at: /opt/homebrew/etc/friday/.friday.env"
+    puts "1. Edit it with your API keys:"
+    puts "   nano /opt/homebrew/etc/friday/.friday.env"
+    puts "2. Login to GitHub CLI:"
+    puts "   gh auth login"
+    puts "\nRun 'friday <base_path>' after completing the setup."
   end
 
   test do
