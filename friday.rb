@@ -3,8 +3,8 @@ class Friday < Formula
   homepage "https://github.com/HeadstartAI/auto_coder"
 
   on_arm do
-    url "https://api.github.com/repos/HeadstartAI/auto_coder/releases/assets/227625298", using: :curl,
-      headers: ["Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
+    url "https://github.com/HeadstartAI/auto_coder/releases/download/v1.2.3/friday", using: :curl,
+      headers: ["Authorization: Bearer #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
     sha256 "7e8acc99e89eda3a88073af0e2da64653489d8652a9016c255061966d4fe9c14"
   end
 
@@ -14,10 +14,7 @@ class Friday < Formula
   depends_on "ripgrep"
 
   def install
-    # Install the downloaded asset as 'friday'
-    bin.install "227625298" => "friday"
-
-    # Make it executable
+    bin.install "friday"
     chmod 0755, bin/"friday"
 
     (prefix/"app/cli/config").mkpath
