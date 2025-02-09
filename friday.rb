@@ -14,7 +14,8 @@ class Friday < Formula
   depends_on "ripgrep"
 
   def install
-    bin.install "friday"
+    # Install the downloaded asset as 'friday'
+    bin.install "227625298" => "friday"
 
     (prefix/"app/cli/config").mkpath
     (prefix/"app/cli/config/.branch_config.yaml").write "{}\n"
