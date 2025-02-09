@@ -1,5 +1,5 @@
-class FridayAutoCoder < Formula
-  desc "Friday AutoCoder"
+class Friday < Formula
+  desc "Friday"
   homepage "https://github.com/HeadstartAI/auto_coder"
   url "https://api.github.com/repos/HeadstartAI/auto_coder/tarball/v1.2.1", using: :curl,
     headers: ["Accept: application/vnd.github.v3.raw",
@@ -23,37 +23,28 @@ class FridayAutoCoder < Formula
       File.write("app/cli/config/.branch_config.yaml", "{}\n")
     end
 
-    # Modify bin/run to use .friday_auto_coder.env
-    inreplace "#{libexec}/bin/run",
-      'if [ ! -f "$PROJECT_ROOT/.env" ]; then',
-      'if [ ! -f "$HOME/.friday_auto_coder.env" ]; then'
-
-    inreplace "#{libexec}/bin/run",
-      'source "$PROJECT_ROOT/.env"',
-      'source "$HOME/.friday_auto_coder.env"'
-
     # Create the wrapper script
-    (bin/"friday_auto_coder").write <<~EOS
+    (bin/"friday").write <<~EOS
       #!/bin/bash
       exec #{libexec}/bin/run "$@"
     EOS
 
-    chmod 0755, bin/"friday_auto_coder"
+    chmod 0755, bin/"friday"
   end
 
   def post_install
     puts "\n📝 Configuration Required:"
-    puts "1. Create ~/.friday_auto_coder.env with your environment variables:"
+    puts "1. Create ~/.friday.env with your environment variables:"
     puts "Example:"
     puts "  OPENAI_API_KEY=your_key_here"
     puts "  ANTHROPIC_API_KEY=your_token_here"
     puts "\n2. Login to GitHub CLI:"
     puts "  Run 'gh auth login' and follow the prompts"
-    puts "\nRun 'friday_auto_coder <base_path>' after completing the setup"
+    puts "\nRun 'friday <base_path>' after completing the setup"
   end
 
   test do
-    system "#{bin}/friday_auto_coder", "--version"
+    system "#{bin}/friday", "--version"
   end
 end
 
