@@ -21,7 +21,20 @@ class Friday < Formula
     chmod 0755, bin/"friday"
 
     (etc/"friday").mkpath
-    (etc/"friday/.branch_config.yaml").write "{}\n"
+
+    branch_config = etc/"friday/.branch_config.yaml"
+    unless branch_config.exist?
+      branch_config.write "{}\n"
+    end
+
+    env_file = etc/"friday/.friday.env"
+    unless env_file.exist?
+      env_file.write <<~EOS
+        # Environment variables for Friday
+        OPENAI_API_KEY=your_key_here
+        ANTHROPIC_API_KEY=your_token_here
+      EOS
+    end
   end
 
   def post_install
