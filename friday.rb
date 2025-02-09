@@ -17,6 +17,9 @@ class Friday < Formula
     # Install the downloaded asset as 'friday'
     bin.install "227625298" => "friday"
 
+    # Make it executable
+    chmod 0755, bin/"friday"
+
     (prefix/"app/cli/config").mkpath
     (prefix/"app/cli/config/.branch_config.yaml").write "{}\n"
   end
