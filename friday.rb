@@ -1,6 +1,7 @@
 class Friday < Formula
   desc "Friday"
   homepage "https://github.com/HeadstartAI/auto_coder"
+  version "1.0.0"
 
   on_arm do
     url "https://api.github.com/repos/HeadstartAI/auto_coder/releases/assets/227681410", using: :curl,
