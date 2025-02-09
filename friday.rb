@@ -1,35 +1,23 @@
 class Friday < Formula
   desc "Friday"
   homepage "https://github.com/HeadstartAI/auto_coder"
-  url "https://api.github.com/repos/HeadstartAI/auto_coder/tarball/v1.2.2", using: :curl,
-    headers: ["Accept: application/vnd.github.v3.raw",
-             "Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
-  sha256 "0bd25d7b3ee7013387d78c891db37f59cae1bec3f7d8762b831adbde81db71a2"
 
-  # Add your dependencies
-  depends_on "poetry"
+  on_arm do
+    url "https://github.com/HeadstartAI/auto_coder/releases/download/v1.2.3/friday", using: :curl,
+      headers: ["Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
+    sha256 "07cab8f252bfc394a5935e54c51c190e6ae45852953dfd847dd124f6950ab2ff"
+  end
+
+  depends_on arch: :arm64
   depends_on "gh"
   depends_on "fd"
-  depends_on "ripgrep"  # this is the package name for 'rg'
+  depends_on "ripgrep"
 
   def install
-    libexec.install Dir["*"]
+    bin.install "friday"
 
-    cd libexec do
-      # Force poetry to create virtualenv in project directory
-      system "poetry", "config", "virtualenvs.in-project", "true", "--local"
-      system "poetry", "install", "--no-interaction", "--no-ansi"
-      system "mkdir", "-p", "app/cli/config"
-      File.write("app/cli/config/.branch_config.yaml", "{}\n")
-    end
-
-    # Create the wrapper script
-    (bin/"friday").write <<~EOS
-      #!/bin/bash
-      exec #{libexec}/bin/run "$@"
-    EOS
-
-    chmod 0755, bin/"friday"
+    (prefix/"app/cli/config").mkpath
+    (prefix/"app/cli/config/.branch_config.yaml").write "{}\n"
   end
 
   def post_install
@@ -44,7 +32,6 @@ class Friday < Formula
   end
 
   test do
-    system "#{bin}/friday", "--version"
+    system "#{bin}/friday"
   end
 end
-
