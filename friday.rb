@@ -1,14 +1,12 @@
-require "download_strategy"
-
 class Friday < Formula
   desc "Friday"
   homepage "https://github.com/HeadstartAI/auto_coder"
 
   on_arm do
-    url "https://api.github.com/repos/HeadstartAI/auto_coder/releases/assets/227625298",
+    url "https://api.github.com/repos/HeadstartAI/auto_coder/releases/assets/227625298", using: :curl,
+      follow_location: true,
       headers: ["Accept: application/octet-stream",
-               "Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"],
-      using: CurlDownloadStrategy
+               "Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
     sha256 "7e8acc99e89eda3a88073af0e2da64653489d8652a9016c255061966d4fe9c14"
   end
 
