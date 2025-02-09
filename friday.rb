@@ -5,7 +5,7 @@ class Friday < Formula
   on_arm do
     url "https://api.github.com/repos/HeadstartAI/auto_coder/releases/assets/227625298", using: :curl,
       headers: ["Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
-    sha256 "07cab8f252bfc394a5935e54c51c190e6ae45852953dfd847dd124f6950ab2ff"
+    sha256 "7e8acc99e89eda3a88073af0e2da64653489d8652a9016c255061966d4fe9c14"
   end
 
   depends_on arch: :arm64
