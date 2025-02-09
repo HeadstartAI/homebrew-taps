@@ -7,7 +7,7 @@ class Friday < Formula
       follow_location: true,
       headers: ["Accept: application/octet-stream",
                "Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
-    sha256 "07cab8f252bfc394a5935e54c51c190e6ae45852953dfd847dd124f6950ab2ff"
+    sha256 "f6bc17539a0eae9711571ef5d4a81683e33c36e4ae10524e674f978be62ba453"
   end
 
   depends_on arch: :arm64
