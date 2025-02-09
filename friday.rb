@@ -1,3 +1,5 @@
+require "download_strategy"
+
 class Friday < Formula
   desc "Friday"
   homepage "https://github.com/HeadstartAI/auto_coder"
@@ -6,7 +8,7 @@ class Friday < Formula
     url "https://api.github.com/repos/HeadstartAI/auto_coder/releases/assets/227625298",
       headers: ["Accept: application/octet-stream",
                "Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"],
-      using: GitHubPrivateRepositoryReleaseDownloadStrategy
+      using: CurlDownloadStrategy
     sha256 "7e8acc99e89eda3a88073af0e2da64653489d8652a9016c255061966d4fe9c14"
   end
 
