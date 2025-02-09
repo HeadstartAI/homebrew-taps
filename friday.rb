@@ -15,7 +15,7 @@ class Friday < Formula
   depends_on "ripgrep"
 
   def install
-    bin.install "friday"
+    bin.install "227625298" => "friday"
     chmod 0755, bin/"friday"
 
     (prefix/"app/cli/config").mkpath
