@@ -3,10 +3,9 @@ class Friday < Formula
   homepage "https://github.com/HeadstartAI/auto_coder"
 
   on_arm do
-    url "https://api.github.com/repos/HeadstartAI/auto_coder/releases/download/v1.2.3/friday", using: :curl,
-      headers: ["Accept: application/vnd.github.v3.raw",
-               "Authorization: Bearer #{ENV['HOMEBREW_GITHUB_API_TOKEN']}",
-               "X-GitHub-Api-Version: 2022-11-28"]
+    url "https://api.github.com/repos/HeadstartAI/auto_coder/releases/assets/227625298", using: :curl,
+      headers: ["Accept: application/octet-stream",
+               "Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
     sha256 "7e8acc99e89eda3a88073af0e2da64653489d8652a9016c255061966d4fe9c14"
   end
 
