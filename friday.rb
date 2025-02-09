@@ -1,7 +1,7 @@
 class Friday < Formula
   desc "Friday"
   homepage "https://github.com/HeadstartAI/auto_coder"
-  version "1.0.0"
+  version "stable"
 
   on_arm do
     url "https://api.github.com/repos/HeadstartAI/auto_coder/releases/assets/227681410", using: :curl,
@@ -20,8 +20,8 @@ class Friday < Formula
     bin.install "friday"
     chmod 0755, bin/"friday"
 
-    (prefix/"app/cli/config").mkpath
-    (prefix/"app/cli/config/.branch_config.yaml").write "{}\n"
+    (etc/"friday").mkpath
+    (etc/"friday/.branch_config.yaml").write "{}\n"
   end
 
   def post_install
