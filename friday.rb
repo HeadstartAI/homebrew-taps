@@ -4,11 +4,11 @@ class Friday < Formula
   version "stable"
 
   on_arm do
-    url "https://api.github.com/repos/HeadstartAI/auto_coder/releases/assets/229189856", using: :curl,
+    url "https://api.github.com/repos/HeadstartAI/auto_coder/releases/assets/227625298", using: :curl,
       follow_location: true,
       headers: ["Accept: application/octet-stream",
                "Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
-    sha256 "bbb1f0d2f8d9186d12c7b86c29dda92192b4a25f7a6603228d0be6a8ba723f13"
+    sha256 "c2eeb4b542718daeb9ef53584e826578693c7ab7bb3248e98c2c1e36f1b8233f"
   end
 
   depends_on arch: :arm64
