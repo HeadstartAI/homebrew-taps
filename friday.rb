@@ -4,7 +4,7 @@ class Friday < Formula
   version "stable"
 
   on_arm do
-    url "https://api.github.com/repos/HeadstartAI/auto_coder/releases/assets/227625298", using: :curl,
+    url "https://api.github.com/repos/HeadstartAI/auto_coder/releases/assets/229245776", using: :curl,
       follow_location: true,
       headers: ["Accept: application/octet-stream",
                "Authorization: token #{ENV['HOMEBREW_GITHUB_API_TOKEN']}"]
