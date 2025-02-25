@@ -2,14 +2,14 @@ class Friday < Formula
   desc "Friday"
   homepage "https://github.com/HeadstartAI/auto_coder"
   version "stable"
-  revision 2
+  revision 3
 
   on_arm do
-    url "https://api.github.com/repos/HeadstartAI/auto_coder_releases/releases/assets/232305172", using: :curl,
+    url "https://api.github.com/repos/HeadstartAI/auto_coder_releases/releases/assets/232520789", using: :curl,
       follow_location: true,
       headers: ["Accept: application/octet-stream",
                "Authorization: token #{ENV['HOMEBREW_FRIDAY_GITHUB_API_TOKEN']}"]
-    sha256 "025fa4d4cb2afab892c9bb41259c6a157fa89b928c2308d71348c8d90daa2a04"
+    sha256 "5b41c267f1c6af2308b58bb4827807142b61ace0f36755657ec2ee5cfa07f3ed"
   end
 
   depends_on arch: :arm64
