@@ -2,13 +2,13 @@ class Friday < Formula
   desc "Friday"
   homepage "https://github.com/HeadstartAI/friday_releases"
   version "stable"
-  revision 10
+  revision 11
 
   on_arm do
-    url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/assets/233558337", using: :curl,
+    url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/assets/233767029", using: :curl,
       follow_location: true,
       headers: ["Accept: application/octet-stream"]
-    sha256 "be577e32999d410484d908ca16cbcfcc8cde950b9abafbe623fbd30dfe2c724d"
+    sha256 "be9a23411884db03b16e7480f40974ae8853a111c3602941e8b666ee63e5a568"
   end
 
   depends_on arch: :arm64
