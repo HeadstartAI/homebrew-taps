@@ -4,11 +4,18 @@ class Friday < Formula
   version "stable"
   revision 15
 
-  on_arm do
+  # Use a conditional URL based on architecture
+  if Hardware::CPU.arm?
     url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/assets/234893780", using: :curl,
       follow_location: true,
       headers: ["Accept: application/octet-stream"]
     sha256 "8b317f1867dad34bbed03231d94f2f9356199a3e78de98ad35a10227b7773e0c"
+  else
+    # Dummy URL to satisfy Homebrew
+    url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/latest", using: :curl,
+      follow_location: true,
+      headers: ["Accept: application/octet-stream"]
+    sha256 "dummy"
   end
 
   depends_on arch: :arm64
@@ -17,11 +24,13 @@ class Friday < Formula
   depends_on "ripgrep"
 
   def install
+    if !Hardware::CPU.arm?
+      odie "Friday is only available for Apple Silicon (ARM) Macs. Your computer has an Intel processor which is not supported."
+    end
+
     bin.install "friday"
     chmod 0755, bin/"friday"
-
     (etc/"friday").mkpath
-
     branch_config = etc/"friday/.branch_config.yaml"
     unless branch_config.exist?
       branch_config.write "{}\n"
@@ -36,6 +45,10 @@ class Friday < Formula
   end
 
   test do
-    system "#{bin}/friday"
+    if !Hardware::CPU.arm?
+      odie "Friday is only available for Apple Silicon (ARM) Macs."
+    else
+      system "#{bin}/friday"
+    end
   end
 end
