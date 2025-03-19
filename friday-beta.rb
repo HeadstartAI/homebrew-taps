@@ -44,8 +44,6 @@ class FridayBeta < Formula
       exec "#{bin}/friday-bin" "$@"
     EOS
     chmod 0755, bin/"friday"
-
-    # Rest of the install method stays the same...
     (etc/"friday").mkpath
     branch_config = etc/"friday/.branch_config.yaml"
     unless branch_config.exist?
