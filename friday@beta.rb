@@ -1,4 +1,4 @@
-class FridayATBeta < Formula
+class Friday@beta < Formula
   desc "Friday (Beta channel)"
   homepage "https://github.com/HeadstartAI/friday_releases"
   version "beta"
