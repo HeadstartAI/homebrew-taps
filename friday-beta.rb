@@ -1,4 +1,4 @@
-class Friday@beta < Formula
+class FridayBeta < Formula
   desc "Friday (Beta channel)"
   homepage "https://github.com/HeadstartAI/friday_releases"
   version "beta"
@@ -60,13 +60,13 @@ class Friday@beta < Formula
     puts ""
     puts "📋 To use this beta version:"
     puts "   If you have the stable version installed:"
-    puts "   brew unlink friday && brew link --force friday@beta"
+    puts "   brew unlink friday && brew link --force friday-beta"
     puts ""
     puts "   If you don't have the stable version installed:"
-    puts "   brew link --force friday@beta"
+    puts "   brew link --force friday-beta"
     puts ""
     puts "📋 To switch back to stable version later:"
-    puts "   brew unlink friday@beta && brew link friday"
+    puts "   brew unlink friday-beta && brew link friday"
     puts ""
     puts "Run 'friday <base_path>' after completing the setup."
   end
