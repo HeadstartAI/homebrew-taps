@@ -28,7 +28,19 @@ class Friday < Formula
       odie "Friday is only available for Apple Silicon (ARM) Macs. Your computer has an Intel processor which is not supported."
     end
 
-    bin.install "friday"
+    # Rename the actual binary to friday-bin
+    bin.install "friday" => "friday-bin"
+    chmod 0755, bin/"friday-bin"
+
+    # Create wrapper script for friday
+    (bin/"friday").write <<~EOS
+      #!/bin/bash
+      if [[ "$1" == "--version" ]]; then
+        echo "Friday (Stable) - Revision #{revision}"
+        exit 0
+      fi
+      exec "#{bin}/friday-bin" "$@"
+    EOS
     chmod 0755, bin/"friday"
     (etc/"friday").mkpath
     branch_config = etc/"friday/.branch_config.yaml"
