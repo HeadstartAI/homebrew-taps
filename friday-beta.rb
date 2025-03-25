@@ -30,20 +30,18 @@ class FridayBeta < Formula
       odie "Friday Beta is only available for Apple Silicon (ARM) Macs. Your computer has an Intel processor which is not supported."
     end
 
-    # Rename the actual binary to friday-bin
-    bin.install "friday" => "friday-bin"
-    chmod 0755, bin/"friday-bin"
+    chmod 0755, bin/"friday"
 
     # Create wrapper script for friday
-    (bin/"friday").write <<~EOS
+    (bin/"friday-wrapper").write <<~EOS
       #!/bin/bash
       if [[ "$1" == "--version" ]]; then
         echo "Friday (Beta) - Revision #{revision}"
         exit 0
       fi
-      exec "#{bin}/friday-bin" "$@"
+      exec "#{bin}/friday" "$@"
     EOS
-    chmod 0755, bin/"friday"
+    chmod 0755, bin/"friday-wrapper"
     (etc/"friday").mkpath
     branch_config = etc/"friday/.branch_config.yaml"
     unless branch_config.exist?
@@ -73,7 +71,7 @@ class FridayBeta < Formula
     if !Hardware::CPU.arm?
       odie "Friday Beta is only available for Apple Silicon (ARM) Macs."
     else
-      system "#{bin}/friday"
+      system "#{bin}/friday-wrapper"
     end
   end
 end
