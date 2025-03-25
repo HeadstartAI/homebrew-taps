@@ -30,7 +30,6 @@ class FridayBeta < Formula
       odie "Friday Beta is only available for Apple Silicon (ARM) Macs. Your computer has an Intel processor which is not supported."
     end
 
-    bin.install "friday"
     chmod 0755, bin/"friday"
 
     # Create wrapper script for friday
