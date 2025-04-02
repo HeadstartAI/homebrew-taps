@@ -65,7 +65,9 @@ class FridayBeta < Formula
     puts "📋 To switch back to stable version later:"
     puts "   brew unlink friday-beta && brew link friday"
     puts ""
-    puts "Run 'friday <base_path>' after completing the setup."
+    puts "Instructions:"
+    puts "   1. Navigate to the git repository folder where you want to use Friday"
+    puts "   2. Run 'friday'"
   end
 
   test do
