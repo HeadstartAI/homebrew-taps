@@ -37,7 +37,7 @@ class FridayBeta < Formula
     (bin/"friday").write <<~EOS
       #!/bin/bash
       if [[ "$1" == "--version" ]]; then
-        echo "Friday (Beta) - Revision #{revision}"
+        echo "Friday (Beta) - #{version}"
         exit 0
       fi
       exec "#{bin}/friday-bin" "$@"
