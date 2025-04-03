@@ -67,6 +67,10 @@ class FridayBeta < Formula
     puts ""
     puts "🚀 Start Friday:"
     puts "   cd <path/to/your/git/repo> && friday"
+    puts ""
+    puts "📋 Additional Commands:"
+    puts "   friday --version    # Display version information"
+    puts "   friday --help       # Display help information"
   end
 
   test do

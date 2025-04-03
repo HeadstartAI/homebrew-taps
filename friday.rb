@@ -1,15 +1,14 @@
 class Friday < Formula
   desc "Friday"
   homepage "https://github.com/HeadstartAI/friday_releases"
-  version "stable"
-  revision 20
+  version "1.4.1"
 
   # Use a conditional URL based on architecture
   if Hardware::CPU.arm?
-    url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/assets/242400940", using: :curl,
+    url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/assets/242958247", using: :curl,
       follow_location: true,
       headers: ["Accept: application/octet-stream"]
-    sha256 "1f07c072a8979b71212fe07835af9feab59362bffe0e977932d42cd2932c006b"
+    sha256 "4026b5cd9eae550d3eecd7c466b563cb3d1130bed90e0c6d513ee4d47d661849"
   else
     # Dummy URL to satisfy Homebrew
     url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/latest", using: :curl,
@@ -36,7 +35,7 @@ class Friday < Formula
     (bin/"friday").write <<~EOS
       #!/bin/bash
       if [[ "$1" == "--version" ]]; then
-        echo "Friday (Stable) - Revision #{revision}"
+        echo "Friday #{version}"
         exit 0
       fi
       exec "#{bin}/friday-bin" "$@"
@@ -53,7 +52,13 @@ class Friday < Formula
     puts "\n📝 Configuration Required:"
     puts "1. Login to GitHub CLI:"
     puts "   gh auth login"
-    puts "\nRun 'friday <base_path>' after completing the setup."
+    puts ""
+    puts "🚀 Start Friday:"
+    puts "   cd <path/to/your/git/repo> && friday"
+    puts ""
+    puts "📋 Additional Commands:"
+    puts "   friday --version    # Display version information"
+    puts "   friday --help       # Display help information"
   end
 
   test do
