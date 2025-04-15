@@ -48,6 +48,12 @@ class FridayBeta < Formula
     unless branch_config.exist?
       branch_config.write "{}\n"
     end
+
+    env_file = etc/"friday/.env"
+    unless env_file.exist?
+      env_file.write "MEMORY_JWT_TOKEN=\n"
+      env_file.write "FIGMA_API_KEY=\n"
+    end
   end
 
   def post_install
