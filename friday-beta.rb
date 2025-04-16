@@ -52,8 +52,8 @@ class FridayBeta < Formula
     env_file = etc/"friday/.env"
     unless env_file.exist?
       env_file.write <<~EOS
-        MEMORY_JWT_TOKEN=
-        FIGMA_API_KEY=
+        FRIDAY_MEMORY_JWT_TOKEN=
+        FRIDAY_FIGMA_API_KEY=
       EOS
     end
   end
