@@ -1,14 +1,14 @@
 class FridayBeta < Formula
   desc "Friday (Beta channel)"
   homepage "https://github.com/HeadstartAI/friday_releases"
-  version "1.5.8"
+  version "1.5.9"
 
   # Use a conditional URL based on architecture
   if Hardware::CPU.arm?
-    url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/assets/247250237", using: :curl,
+    url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/assets/247307792", using: :curl,
       follow_location: true,
       headers: ["Accept: application/octet-stream"]
-    sha256 "e16fcf85687f07e6a66ad54dfdf66aa8a56fb834b3e2deaa765ec43da3d4ed00"
+    sha256 "fa54cecc69a49b38e0a8e30052f5014a2b2d7da006a9512a149d1cc073f6dba5"
   else
     # Dummy URL to satisfy Homebrew
     url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/tags/beta", using: :curl,
@@ -51,10 +51,7 @@ class FridayBeta < Formula
 
     env_file = etc/"friday/.env"
     unless env_file.exist?
-      env_file.write <<~EOS
-        FRIDAY_MEMORY_JWT_TOKEN=
-        FRIDAY_FIGMA_API_KEY=
-      EOS
+      env_file.write ""
     end
   end
 
