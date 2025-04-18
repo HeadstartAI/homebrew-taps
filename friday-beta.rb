@@ -52,12 +52,7 @@ class FridayBeta < Formula
   end
 
   def post_install
-    npx_available = system "which npx >/dev/null 2>&1"
-
-    puts "\n📝 Beta Version Configuration Required:"
-    puts "1. Login to GitHub CLI:"
-    puts "   gh auth login"
-    puts ""
+    npx_available = system "which npx"
 
     unless npx_available
       puts "⚠️ npx not found in your PATH. Friday requires npx to function properly."
@@ -65,7 +60,10 @@ class FridayBeta < Formula
       puts "   Verify installation with: node --version && npx --version"
       puts ""
     end
-
+    puts "\n📝 Beta Version Configuration Required:"
+    puts "1. Login to GitHub CLI:"
+    puts "   gh auth login"
+    puts ""
     puts "📋 To use this beta version:"
     puts "   If you have the stable version installed:"
     puts "   brew unlink friday && brew link --force friday-beta"
