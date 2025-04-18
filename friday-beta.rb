@@ -52,9 +52,9 @@ class FridayBeta < Formula
   end
 
   def post_install
-    npx_available = system("bash", "-c", "command -v npx >/dev/null")
+    npx_check = `command -v npx 2>/dev/null`.strip
 
-    unless npx_available
+    if npx_check.empty?
       puts "⚠️ npx not found in your PATH. Friday requires npx to function properly."
       puts "   Node.js should have been installed as a dependency, but you may need to restart your terminal."
       puts "   Verify installation with: node --version && npx --version"
