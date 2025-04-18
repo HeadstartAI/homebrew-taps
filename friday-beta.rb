@@ -23,6 +23,7 @@ class FridayBeta < Formula
   depends_on "gh"
   depends_on "fd"
   depends_on "ripgrep"
+  depends_on "node"
 
   def install
     if !Hardware::CPU.arm?
@@ -51,10 +52,20 @@ class FridayBeta < Formula
   end
 
   def post_install
+    npx_available = system "which npx >/dev/null 2>&1"
+
     puts "\n📝 Beta Version Configuration Required:"
     puts "1. Login to GitHub CLI:"
     puts "   gh auth login"
     puts ""
+
+    unless npx_available
+      puts "⚠️ npx not found in your PATH. Friday requires npx to function properly."
+      puts "   Node.js should have been installed as a dependency, but you may need to restart your terminal."
+      puts "   Verify installation with: node --version && npx --version"
+      puts ""
+    end
+
     puts "📋 To use this beta version:"
     puts "   If you have the stable version installed:"
     puts "   brew unlink friday && brew link --force friday-beta"
@@ -77,6 +88,7 @@ class FridayBeta < Formula
     if !Hardware::CPU.arm?
       odie "Friday Beta is only available for Apple Silicon (ARM) Macs."
     else
+      system "which", "npx"
       system "#{bin}/friday"
     end
   end
