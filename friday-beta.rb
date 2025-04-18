@@ -59,7 +59,8 @@ class FridayBeta < Formula
       puts "   Node.js should have been installed as a dependency, but you may need to restart your terminal."
       puts "   Verify installation with: node --version && npx --version"
     end
-    puts "\n📝 Beta Version Configuration Required:"
+    puts ""
+    puts "📝 Beta Version Configuration Required:"
     puts "1. Login to GitHub CLI:"
     puts "   gh auth login"
     puts ""
@@ -79,6 +80,7 @@ class FridayBeta < Formula
     puts "📋 Additional Commands:"
     puts "   friday --version    # Display version information"
     puts "   friday --help       # Display help information"
+    puts ""
   end
 
   test do
