@@ -1,14 +1,14 @@
 class Friday < Formula
   desc "Friday"
   homepage "https://github.com/HeadstartAI/friday_releases"
-  version "1.5.11"
+  version "1.6.3"
 
   # Use a conditional URL based on architecture
   if Hardware::CPU.arm?
-    url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/assets/247353499", using: :curl,
+    url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/assets/250501557", using: :curl,
       follow_location: true,
       headers: ["Accept: application/octet-stream"]
-    sha256 "d93dba12df180ae46226d3191150c284f3ee823be1d6d55d6ac888584a1f2664"
+    sha256 "7eddb392f5cd1445d6d29cbb53ad49852efa48c5f1f9b7bc37c6456fdc85e264"
   else
     # Dummy URL to satisfy Homebrew
     url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/latest", using: :curl,
@@ -21,6 +21,7 @@ class Friday < Formula
   depends_on "gh"
   depends_on "fd"
   depends_on "ripgrep"
+  depends_on "node"
 
   def install
     if !Hardware::CPU.arm?
@@ -49,7 +50,15 @@ class Friday < Formula
   end
 
   def post_install
-    puts "\n📝 Configuration Required:"
+    npx_check = `command -v npx 2>/dev/null`.strip
+
+    if npx_check.empty?
+      puts "⚠️ npx not found in your PATH. Friday requires npx to function properly."
+      puts "   Node.js should have been installed as a dependency, but you may need to restart your terminal."
+      puts "   Verify installation with: node --version && npx --version"
+    end
+    puts ""
+    puts "📝 Configuration Required:"
     puts "1. Login to GitHub CLI:"
     puts "   gh auth login"
     puts ""
@@ -59,12 +68,14 @@ class Friday < Formula
     puts "📋 Additional Commands:"
     puts "   friday --version    # Display version information"
     puts "   friday --help       # Display help information"
+    puts ""
   end
 
   test do
     if !Hardware::CPU.arm?
       odie "Friday is only available for Apple Silicon (ARM) Macs."
     else
+      system "which", "npx"
       system "#{bin}/friday"
     end
   end
