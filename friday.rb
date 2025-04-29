@@ -21,6 +21,7 @@ class Friday < Formula
   depends_on "gh"
   depends_on "fd"
   depends_on "ripgrep"
+  depends_on "node"
 
   def install
     if !Hardware::CPU.arm?
@@ -49,7 +50,15 @@ class Friday < Formula
   end
 
   def post_install
-    puts "\n📝 Configuration Required:"
+    npx_check = `command -v npx 2>/dev/null`.strip
+
+    if npx_check.empty?
+      puts "⚠️ npx not found in your PATH. Friday requires npx to function properly."
+      puts "   Node.js should have been installed as a dependency, but you may need to restart your terminal."
+      puts "   Verify installation with: node --version && npx --version"
+    end
+    puts ""
+    puts "📝 Configuration Required:"
     puts "1. Login to GitHub CLI:"
     puts "   gh auth login"
     puts ""
@@ -59,12 +68,14 @@ class Friday < Formula
     puts "📋 Additional Commands:"
     puts "   friday --version    # Display version information"
     puts "   friday --help       # Display help information"
+    puts ""
   end
 
   test do
     if !Hardware::CPU.arm?
       odie "Friday is only available for Apple Silicon (ARM) Macs."
     else
+      system "which", "npx"
       system "#{bin}/friday"
     end
   end
