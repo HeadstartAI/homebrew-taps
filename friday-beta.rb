@@ -1,14 +1,14 @@
 class FridayBeta < Formula
   desc "Friday (Beta channel)"
   homepage "https://github.com/HeadstartAI/friday_releases"
-  version "1.6.7"
+  version "1.6.8"
 
   # Use a conditional URL based on architecture
   if Hardware::CPU.arm?
-    url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/assets/253006859", using: :curl,
+    url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/assets/253011534", using: :curl,
       follow_location: true,
       headers: ["Accept: application/octet-stream"]
-    sha256 "7493ba22184cb1445442d5b085026edfb4b60fc2f18651dc91234522308c3a12"
+    sha256 "5c24402bfc6080ea1167aa75a7f648bdb0194b6df28d635e5c5d62452c8ad032"
   else
     # Dummy URL to satisfy Homebrew
     url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/tags/beta", using: :curl,
