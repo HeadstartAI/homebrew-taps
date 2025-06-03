@@ -47,6 +47,10 @@ class Friday < Formula
     unless branch_config.exist?
       branch_config.write "{}\n"
     end
+    env_file = etc/"friday/.env"
+    unless env_file.exist?
+      env_file.write ""
+    end
   end
 
   def post_install
