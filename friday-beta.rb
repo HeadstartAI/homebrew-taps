@@ -5,10 +5,10 @@ class FridayBeta < Formula
 
   # Use a conditional URL based on architecture
   if Hardware::CPU.arm?
-    url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/assets/261341704", using: :curl,
+    url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/assets/261344941", using: :curl,
       follow_location: true,
       headers: ["Accept: application/octet-stream"]
-    sha256 "6ff29e9a96ae0f45febbe6bb49ae51e6253e6a3a675ffd138a4bb4d88a17fa5f"
+    sha256 "1512587fecc771eb2ec068fde280bcc1b25eae7d19f30e512b0445d0ef2b5625"
   else
     # Dummy URL to satisfy Homebrew
     url "https://api.github.com/repos/HeadstartAI/friday_releases/releases/tags/beta", using: :curl,
