@@ -1,7 +1,7 @@
 class Friday < Formula
   desc "Friday"
   homepage "https://github.com/HeadstartAI/friday_releases"
-  version "1.10.3-rev.0"
+  version "1.11.1"
 
   # Use a conditional URL based on architecture
   if Hardware::CPU.arm?
