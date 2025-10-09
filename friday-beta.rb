@@ -23,7 +23,7 @@ class FridayBeta < Formula
   depends_on "gh"
   depends_on "fd"
   depends_on "ripgrep"
-  depends_on "node@22"
+  depends_on "node"
 
   def install
     if !Hardware::CPU.arm?
@@ -56,8 +56,18 @@ class FridayBeta < Formula
   end
 
   def post_install
-    npx_check = `command -v npx 2>/dev/null`.strip
+    node_version_output = `node --version 2>/dev/null`.strip
+    if node_version_output =~ /v(\d+)\./
+      major_version = $1.to_i
+      if major_version < 22
+        puts "⚠️ Friday requires Node.js v22 or higher."
+        puts "   Current version: #{node_version_output}"
+        puts "   Please make Node.js v22+ active in your PATH and restart your terminal."
+        puts ""
+      end
+    end
 
+    npx_check = `command -v npx 2>/dev/null`.strip
     if npx_check.empty?
       puts "⚠️ npx not found in your PATH. Friday requires npx to function properly."
       puts "   Node.js should have been installed as a dependency, but you may need to restart your terminal."
