@@ -24,6 +24,7 @@ class FridayBeta < Formula
   depends_on "fd"
   depends_on "ripgrep"
   depends_on "node@22"
+  depends_on "python@3.12"
 
   def install
     if !Hardware::CPU.arm?
