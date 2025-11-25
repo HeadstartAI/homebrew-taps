@@ -36,10 +36,16 @@ class Friday < Formula
     # Create wrapper script for friday
     (bin/"friday").write <<~EOS
       #!/bin/bash
-      if [[ "$1" == "--version" ]]; then
-        echo "Friday #{version}"
-        exit 0
-      fi
+      case "$1" in
+        --version)
+          echo "Friday #{version}"
+          exit 0
+          ;;
+        --update)
+          brew update && brew upgrade friday
+          exit $?
+          ;;
+      esac
       exec "#{bin}/friday-bin" "$@"
     EOS
     chmod 0755, bin/"friday"
@@ -65,6 +71,7 @@ class Friday < Formula
     puts ""
     puts "📋 Additional Commands:"
     puts "   friday --version    # Display version information"
+    puts "   friday --update     # Update Friday to the latest version"
     puts "   friday --help       # Display help information"
     puts ""
   end
