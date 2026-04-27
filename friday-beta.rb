@@ -24,6 +24,7 @@ class FridayBeta < Formula
   depends_on "fd"
   depends_on "ripgrep"
   depends_on "node@22"
+  depends_on "expat"
   depends_on "python@3.12"
 
   def install
@@ -36,6 +37,8 @@ class FridayBeta < Formula
     chmod 0755, bin/"friday-bin"
 
     # Create wrapper script for friday
+    # Sets DYLD_LIBRARY_PATH to use Homebrew expat, fixing pyexpat dlopen error
+    # where system libexpat stub is missing _XML_SetAllocTrackerActivationThreshold
     (bin/"friday").write <<~EOS
       #!/bin/bash
       case "$1" in
@@ -48,6 +51,7 @@ class FridayBeta < Formula
           exit $?
           ;;
       esac
+      export DYLD_LIBRARY_PATH="#{Formula["expat"].opt_lib}:${DYLD_LIBRARY_PATH}"
       exec "#{bin}/friday-bin" "$@"
     EOS
     chmod 0755, bin/"friday"
